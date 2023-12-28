@@ -13,8 +13,6 @@ app.use(express.static('public'));
 
 app.use('/',router);
 
-
-
 const start =  async()=>{
     try {
         await connectDB(process.env.MONGO_URI);
