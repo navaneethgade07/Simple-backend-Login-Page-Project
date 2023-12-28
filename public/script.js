@@ -13,29 +13,43 @@ document.addEventListener('DOMContentLoaded', () => {
 
         // Fetch API to make an HTTP request to the /login endpoint on the server
         // HTTP request method (POST)
-        const response = await fetch('/login', {
-            method: 'POST',
-            headers: {
-              'Content-Type': 'application/json',
-            },
-            body: JSON.stringify(data),
-          });
+        try {
+            
+            const response = await fetch('/login', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(data),
+            });
+            
+            // storing the response that has been came from server side 
+            const result = await response.json();
+            
+            
+            // result.message which is defined in server js file
+            // the content will be dispayed in the message element(i.e. paragraph)
+            if (result.success == true) {
+                message.textContent = result.message;
+                message.style.color = 'green';
 
-        // storing the response that has been came from server side in result
-        const result = response.json();
+                // Reset the form after a successfull login
+                loginForm.reset();
 
-        
+                setTimeout(()=>{
+                    message.textContent = '';
+                },2000);
 
-        // result.message which is defined in server js file
-        // the content will be dispayed in the message element(i.e. paragraph)
-        if (result.success) {
-            message.textContent = result.message;
-            message.style.color = 'green';
-        } else {
-            message.textContent = result.message;
-            message.style.color = 'red';
+            } else {
+                message.textContent = result.message;
+                message.style.color = 'red';
+
+            }
+
+        } catch (error) {
+            console.error('Fetch error:', error);
         }
-
+            
     });
 });
 
