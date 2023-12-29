@@ -20,7 +20,8 @@ These instructions will get you a copy of the project up and running on your loc
 ### Setting up MongoDB
 1. Install MongoDB
 2. Setup the mongoDB atlas
-
+3. Replace the url with your MongoDB connection String
+   
 ### Running the Application
 1. Start the node.js server
 2. The server will run at http://localhost:3000.
